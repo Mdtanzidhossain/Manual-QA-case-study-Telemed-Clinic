@@ -1,0 +1,1 @@
+# Manual-QA-case-study-Telemed-Clinic
