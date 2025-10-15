@@ -1,0 +1,11 @@
+Module,Feature,TestCaseID,Title,Preconditions,Steps,Expected,Type,Priority,Tags,Data,Browser,Automation
+Auth,Registration & OTP,CLN-001,Register with valid OTP,"No account","Sign up -> receive OTP -> submit","Account created; user logged in",Pos,P1,OTP;Smoke,Valid phone/email,Chrome,No
+Auth,Registration & OTP,CLN-002,OTP expired flow,"OTP issued","Wait past expiry -> submit","User sees 'OTP expired' and can resend",Edge,P1,OTP,Expiry=120s,Firefox,No
+Profile,Patient Profile,CLN-010,Edit profile with valid data,Logged in,"Open profile -> edit -> save","Changes persist and retrievable",Pos,P2,Profile,,Edge,No
+Discovery,Search/Filter,CLN-020,Filter by specialty+rating,None,"Search 'Cardio' + rating ≥4","Results match filter, order stable",Pos,P2,Search,Specialty=Cardio,Chrome,No
+Appointments,Create,CLN-030,Book available slot,Logged in; doctor has open slot,"Pick slot -> confirm","Appointment confirmed; notification sent",Pos,P1,Booking;Smoke,Slot T+2d,Chrome,No
+Appointments,Create,CLN-031,Prevent double booking,Scheduled appt exists,"Pick overlapping slot -> confirm","Conflict error shown; no booking",Neg,P1,Validation,Overlap 15m,Firefox,No
+Appointments,Reschedule,CLN-040,Reschedule within policy,Existing appt,"Reschedule to new valid slot","Old canceled; new confirmed",Pos,P2,Reschedule,,Edge,No
+Appointments,Cancel,CLN-050,Cancel with fee policy,Existing appt,"Cancel near start time","Policy message & correct state",Edge,P2,Policy,Start-30m,Chrome,No
+Notifications,Email/SMS,CLN-060,Receive confirmation SMS,New booking,"Complete booking","SMS/Email recorded in logs",Pos,P3,Notify,,Firefox,No
+Records,PDF Download,CLN-070,Download report requires auth,Logged in,"Open record -> download","File downloads; no PII leakage",Pos,P1,Security,PDF,Edge,No
